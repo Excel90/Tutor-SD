@@ -30,41 +30,50 @@ class graph:
             print("not Connected")
                 
 
-    def bfs(self,start, visited = []):
+    def bfs(self,start):
         visited = []
         visited.append(start)
-        for i in self.al[start]:
+        for i in sorted(self.al[start]):
             visited.append(i)
         for i in visited:
-            print(i)
-            for j in self.al[i]:
+            for j in sorted(self.al[i]):
                 if j not in visited:
                     visited.append(j)
         print(visited)
+
+    def dfs(self, start, visited = None):
+        if visited == None:
+            visited = []
+        visited.append(start)
+        for i in sorted(self.al[start]):
+            if i not in visited:
+                self.dfs(i,visited)
+        return visited
 
 
     def printGraph(self):
         print(self.al)
 
 _graph = graph()
-# _graph.add_vertex("a")
-# _graph.add_vertex("b")
-# _graph.add_vertex("c")
-# _graph.add_vertex("d")
-# _graph.connect("a","b")
-# _graph.connect("b","c")
-# _graph.connect("c", "a")
-# _graph.connect("a", "d")
+_graph.add_vertex("a")
+_graph.add_vertex("b")
+_graph.add_vertex("c")
+_graph.add_vertex("d")
+_graph.connect("a","b")
+_graph.connect("b","c")
+_graph.connect("c", "a")
+_graph.connect("d","b")
 
-_list = [
-    [1,2],  #0
-    [0,3],    #1
-    [0,3],   #2
-    [4],   #3
-    []   #4
-]
+# _list = [
+#     [1,2],  #0
+#     [0,3],    #1
+#     [0,3],   #2
+#     [4,1,2],   #3
+#     [3,5],   #4
+#     [4]   #5
+# ]
 
-_graph.addAdjacencyList(_list)
+# _graph.addAdjacencyList(_list)
 
 # _matrix = [
 #     [0,1,1,0,1],
@@ -76,6 +85,11 @@ _graph.addAdjacencyList(_list)
 
 # _graph.addAdjacencyMatrix(_matrix)
 
-_graph.bfs(2)
+_graph.bfs("b")
+print(_graph.dfs("b"))
 
-_graph.printGraph()
+# _graph.printGraph()
+
+# DFS algorithm in Python
+
+            
